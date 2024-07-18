@@ -1,4 +1,4 @@
-#include < main.h>
+#include "main.h"
 
 /**
  * printf - prints out text from a unknown number of arguments
@@ -8,23 +8,28 @@
  *
  */
 
-int _printf(const char *format, ...);
+int _printf(const char *format, ...)
 {
-	int i, countB;
-
-	countB = 0
+	unsigned int i, count = 0;
 
 	va_list args;
 
-	va_start (args, format);
+	va_start(args, format);
 
-	for (i = 0; format [i]; != '\0'; i++)
+	for (i = 0; format[i] != '\0'; i++)
 	{
 
-	if (format [i] != '%')
+	if (format[i] != '%')
+		{
+		_putchar (format[i]);
+		}
+	if (format[i] == '%' && format[i + 1]) == 'c'
 	{
-	putchar (format [i]);
+		_putchar(va_arg(args, int))
+		}
+	count += 1;
 	}
-	}
-
 }
+	va_end(args);
+	return (count);
+
