@@ -6,14 +6,14 @@
  */
 void print_number(int num)
 {
-    if (num < 0)
-    {
-        _putchar('-');
-        num = -num;
-    }
-    if (num / 10)
-        print_number(num / 10);
-    _putchar((num % 10) + '0');
+	if (num < 0)
+{
+	 _putchar('-');
+	 num = -num;
+ }
+	if (num / 10)
+	 print_number(num / 10);
+	_putchar((num % 10) + '0');
 }
 
 /**
@@ -92,8 +92,14 @@ int _printf(const char *format, ...)
 				write(1, str, str_len);
 				count += str_len;
 			}
+				  else
+            {
+                /* Handle unknown format specifiers */
+                _putchar('%');
+                _putchar(*format);
+                count += 2;
+            }
 		}
-
 		format++;
 	}
 
