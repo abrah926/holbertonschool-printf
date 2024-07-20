@@ -1,6 +1,6 @@
 #include "main.h"
 #include <limits.h>
-#include <stdio.h>
+#include <stdarg.h>
 
 /**
  * print_number - Helper function to print an integer
@@ -10,12 +10,12 @@ void print_number(int num)
 {
     if (num < 0) 
     {
-        putchar('-');
+        _putchar('-');
         num = -num;
     }
     if (num / 10)
         print_number(num / 10);
-    putchar((num % 10) + '0');
+    _putchar((num % 10) + '0');
 }
 
 /**
@@ -52,7 +52,7 @@ void print_unsigned(unsigned int num, int base, int uppercase)
     }
 
     while (i--)
-        putchar(buffer[i]);
+        _putchar(buffer[i]);
 }
 
 /**
@@ -67,12 +67,12 @@ void print_pointer(void *ptr)
     int i = 0;
 
     addr = (unsigned long)ptr;
-    putchar('0');
-    putchar('x');
+    _putchar('0');
+    _putchar('x');
 
     if (addr == 0)
     {
-        putchar('0');
+        _putchar('0');
     }
     else
     {
@@ -83,7 +83,7 @@ void print_pointer(void *ptr)
         }
 
         while (i--)
-            putchar(buffer[i]);
+            _putchar(buffer[i]);
     }
 }
 
@@ -114,118 +114,124 @@ int _printf(const char *format, ...)
     {
         if (format[i] == '%') 
         {
-            i++;  
-            switch (format[i]) 
+            i++;
+            if (format[i] == 'c')
             {
-                case 'c':
-                    c = va_arg(args, int);
-                    putchar(c);
+                c = va_arg(args, int);
+                _putchar(c);
+                countB++;
+            }
+            else if (format[i] == 's')
+            {
+                str = va_arg(args, char *);
+                if (str == NULL) 
+                {
+                    str = "(null)";
+                }
+                while (*str) 
+                {
+                    _putchar(*str++);
                     countB++;
-                    break;
-                case 's':
-                    str = va_arg(args, char *);
-                    if (str == NULL) 
-                    {
-                        str = "(null)";
-                    }
-                    while (*str) 
-                    {
-                        putchar(*str++);
-                        countB++;
-                    }
-                    break;
-                case 'd':
-                case 'i':
-                    num = va_arg(args, int);
-                    if (num < 0) 
-                    {
-                        putchar('-');
-                        countB++;
-                        num = -num;
-                    }
-                    print_number(num);
-                    {
-                        int temp = num;
-                        while (temp)
-                        {
-                            countB++;
-                            temp /= 10;
-                        }
-                    }
-                    break;
-                case 'u':
-                    u_num = va_arg(args, unsigned int);
-                    print_unsigned(u_num, 10, 0);
-                    {
-                        unsigned int temp = u_num;
-                        while (temp)
-                        {
-                            countB++;
-                            temp /= 10;
-                        }
-                    }
-                    break;
-                case 'o':
-                    o_num = va_arg(args, unsigned int);
-                    print_unsigned(o_num, 8, 0);
-                    {
-                        unsigned int temp = o_num;
-                        while (temp)
-                        {
-                            countB++;
-                            temp /= 8;
-                        }
-                    }
-                    break;
-                case 'x':
-                    x_num = va_arg(args, unsigned int);
-                    print_unsigned(x_num, 16, 0);
-                    {
-                        unsigned int temp = x_num;
-                        while (temp)
-                        {
-                            countB++;
-                            temp /= 16;
-                        }
-                    }
-                    break;
-                case 'X':
-                    X_num = va_arg(args, unsigned int);
-                    print_unsigned(X_num, 16, 1);
-                    {
-                        unsigned int temp = X_num;
-                        while (temp)
-                        {
-                            countB++;
-                            temp /= 16;
-                        }
-                    }
-                    break;
-                case 'p':
-                    ptr = va_arg(args, void *);
-                    print_pointer(ptr);
-                    countB += 2;
-                    addr = (unsigned long)ptr;
-                    while (addr)
-                    {
-                        countB++;
-                        addr /= 16;
-                    }
-                    break;
-                case '%':
-                    putchar('%');
+                }
+            }
+            else if (format[i] == 'd' || format[i] == 'i')
+            {
+                num = va_arg(args, int);
+                if (num < 0) 
+                {
+                    _putchar('-');
                     countB++;
-                    break;
-                default:
-                    putchar('%');
-                    putchar(format[i]);
-                    countB += 2;
-                    break;
+                    num = -num;
+                }
+                print_number(num);
+                {
+                    int temp = num;
+                    while (temp)
+                    {
+                        countB++;
+                        temp /= 10;
+                    }
+                }
+            }
+            else if (format[i] == 'u')
+            {
+                u_num = va_arg(args, unsigned int);
+                print_unsigned(u_num, 10, 0);
+                {
+                    unsigned int temp = u_num;
+                    while (temp)
+                    {
+                        countB++;
+                        temp /= 10;
+                    }
+                }
+            }
+            else if (format[i] == 'o')
+            {
+                o_num = va_arg(args, unsigned int);
+                print_unsigned(o_num, 8, 0);
+                {
+                    unsigned int temp = o_num;
+                    while (temp)
+                    {
+                        countB++;
+                        temp /= 8;
+                    }
+                }
+            }
+            else if (format[i] == 'x')
+            {
+                x_num = va_arg(args, unsigned int);
+                print_unsigned(x_num, 16, 0);
+                {
+                    unsigned int temp = x_num;
+                    while (temp)
+                    {
+                        countB++;
+                        temp /= 16;
+                    }
+                }
+            }
+            else if (format[i] == 'X')
+            {
+                X_num = va_arg(args, unsigned int);
+                print_unsigned(X_num, 16, 1);
+                {
+                    unsigned int temp = X_num;
+                    while (temp)
+                    {
+                        countB++;
+                        temp /= 16;
+                    }
+                }
+            }
+            else if (format[i] == 'p')
+            {
+                ptr = va_arg(args, void *);
+                print_pointer(ptr);
+                countB += 2;
+                addr = (unsigned long)ptr;
+                while (addr)
+                {
+                    countB++;
+                    addr /= 16;
+                }
+            }
+            else if (format[i] == '%')
+            {
+                _putchar('%');
+                countB++;
+            }
+            else
+            {
+                _putchar('%');
+                _putchar(format[i]);
+                countB += 2;
             }
         } 
         else 
         {
-            putchar(format[i]);
+            _putchar(format[i]);
             countB++;
         }
     }
