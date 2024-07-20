@@ -7,29 +7,25 @@
 void print_number(int num)
 {
 	if (num < 0)
-{
-	 _putchar('-');
-	 num = -num;
- }
+	{
+		_putchar('-');
+		num = -num;
+	}
 	if (num / 10)
-	 print_number(num / 10);
+		print_number(num / 10);
 	_putchar((num % 10) + '0');
 }
 
 /**
- * printf - prints out text from a unknown number of arguments
+ * _printf - prints out text from an unknown number of arguments
  *
  * @format: format specifier
  * Return: Number of bytes
- *
  */
-
 int _printf(const char *format, ...)
 {
 	int num;
-	int i = 0;
 	int count = 0;
-
 	va_list args;
 
 	if (format == NULL)
@@ -62,25 +58,26 @@ int _printf(const char *format, ...)
 				write(1, &c, 1);
 				count++;
 			}
-			else if (format[i] == 'd' || format[i] == 'i')
-            {
-                num = va_arg(args, int);
-                if (num < 0)
-                {
-                    _putchar('-');
-                    count++;
-                    num = -num;
-                }
-                print_number(num);
-                {
-                    int temp = num;
-                    while (temp)
-                    {
-                        count++;
-                        temp /= 10;
-                    }
-                }
-            }
+			else if (*format == 'd' || *format == 'i')
+			{
+				num = va_arg(args, int);
+				if (num < 0)
+				{
+					_putchar('-');
+					count++;
+					num = -num;
+				}
+				print_number(num);
+				{
+					int temp = num;
+
+					while (temp)
+					{
+						count++;
+						temp /= 10;
+					}
+				}
+			}
 			else if (*format == 's')
 			{
 				char *str = va_arg(args, char*);
@@ -92,13 +89,13 @@ int _printf(const char *format, ...)
 				write(1, str, str_len);
 				count += str_len;
 			}
-				  else
-            {
-                /* Handle unknown format specifiers */
-                _putchar('%');
-                _putchar(*format);
-                count += 2;
-            }
+			else
+			{
+				/* Handle unknown format specifiers */
+				_putchar('%');
+				_putchar(*format);
+				count += 2;
+			}
 		}
 		format++;
 	}
@@ -106,5 +103,5 @@ int _printf(const char *format, ...)
 	va_end(args);
 
 	return (count);
-
 }
+
