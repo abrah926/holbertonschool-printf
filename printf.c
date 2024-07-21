@@ -61,16 +61,16 @@ int _printf(const char *format, ...)
 			else if (*format == 'd' || *format == 'i')
 			{
 				num = va_arg(args, int);
+				  if (num == 0)
+				{
+				_putchar('0');
+				count++;
+				)
 				if (num < 0)
 				{
 					_putchar('-');
 					count++;
 					num = -num;
-				}
-				  if (num == 0)
-				{
-				_putchar('0');
-				count++;
 				}
 				print_number(num);
 				{
