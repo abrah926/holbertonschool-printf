@@ -48,7 +48,6 @@ int _printf(const char *format, ...)
 
 			if (*format == '%')
 			{
-				write(1, format, 1);
 				count++;
 			}
 			else if (*format == 'c')
@@ -61,11 +60,6 @@ int _printf(const char *format, ...)
 			else if (*format == 'd' || *format == 'i')
 			{
 				num = va_arg(args, int);
-				  if (num == 0)
-				{
-				_putchar('0');
-				count++;
-				)
 				if (num < 0)
 				{
 					_putchar('-');
