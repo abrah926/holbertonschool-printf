@@ -67,6 +67,11 @@ int _printf(const char *format, ...)
 					count++;
 					num = -num;
 				}
+				  if (num == 0)
+				{
+				_putchar('0');
+				count++;
+				}
 				print_number(num);
 				{
 					int temp = num;
