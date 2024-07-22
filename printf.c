@@ -66,14 +66,66 @@ int _printf(const char *format, ...)
 					count++;
 					num = -num;
 				}
+				if (num == 0)
+				{
+				_putchar('0');
+				count++;
+				}
+				else
+				{
 				print_number(num);
 				{
-					int temp = num;
+				int temp = num;
+				int digits = 0;
 
-					while (temp)
-					{
-						count++;
-						temp /= 10;
+				if (temp == 0) 
+				{
+				digits = 1;
+				} else 
+				  else
+    {
+        print_number(num);
+        {
+            int temp = num;
+            int digits = 0;
+
+            if (temp == 0) {
+                digits = 1;
+            } else {
+                while (temp)
+                {
+                    digits++;
+                    temp /= 10;
+                }
+            }
+            count += digits;  else
+    {
+        print_number(num);
+        {
+            int temp = num;
+            int digits = 0;
+
+            if (temp == 0)
+			{
+			digits = 1;
+            }
+			else
+			{
+            while (temp)
+            {
+                    digits++;
+                    temp /= 10;
+            }
+            }
+            count += digits;
+			{
+            while (temp)
+            {
+					digits++;
+					temp /= 10;
+                }
+            }
+            count += digits;
 					}
 				}
 			}
