@@ -1,6 +1,7 @@
 #include "main.h"
 #include <stdarg.h>
 #include <unistd.h>
+#include <limits.h>
 
 /**
  * print_number - Helper function to print an integer
@@ -63,16 +64,35 @@ int _printf(const char *format, ...)
 			else if (*format == 'd' || *format == 'i')
 			{
 				num = va_arg(args, int);
-				if (num < 0)
+				if (num == INT_MIN)
+				{
+					write(1, "-2147483648", 11);
+					count += 11;
+				}
+				else if (num < 0)
 				{
 					_putchar('-');
 					count++;
 					num = -num;
-				}
-				if (num == 0)
-				{
-					_putchar('0');
-					count++;
+					print_number(num);
+					{
+						int temp = num;
+						int digits = 0;
+
+						if (temp == 0)
+						{
+							digits = 1;
+						}
+						else
+						{
+							while (temp)
+							{
+								digits++;
+								temp /= 10;
+							}
+						}
+						count += digits;
+					}
 				}
 				else
 				{
