@@ -69,33 +69,14 @@ int _printf(const char *format, ...)
 					write(1, "-2147483648", 11);
 					count += 11;
 				}
-				else if (num < 0)
-				{
-					_putchar('-');
-					count++;
-					num = -num;
-					print_number(num);
-					{
-						int temp = num;
-						int digits = 0;
-
-						if (temp == 0)
-						{
-							digits = 1;
-						}
-						else
-						{
-							while (temp)
-							{
-								digits++;
-								temp /= 10;
-							}
-						}
-						count += digits;
-					}
-				}
 				else
 				{
+					if (num < 0)
+					{
+						_putchar('-');
+						count++;
+						num = -num;
+					}
 					print_number(num);
 					{
 						int temp = num;
@@ -121,6 +102,11 @@ int _printf(const char *format, ...)
 			{
 				char *str = va_arg(args, char *);
 				int str_len = 0;
+
+				if (str == NULL)
+				{
+					str = "(null)";
+				}
 
 				while (str[str_len] != '\0')
 					str_len++;
