@@ -1,4 +1,6 @@
 #include "main.h"
+#include <stdarg.h>
+#include <unistd.h>
 
 /**
  * print_number - Helper function to print an integer
@@ -21,6 +23,7 @@ void print_number(int num)
  *
  * @format: format specifier
  * Return: Number of bytes
+ *
  */
 int _printf(const char *format, ...)
 {
@@ -48,12 +51,12 @@ int _printf(const char *format, ...)
 
 			if (*format == '%')
 			{
+				write(1, format, 1);
 				count++;
 			}
 			else if (*format == 'c')
 			{
 				char c = va_arg(args, int);
-
 				write(1, &c, 1);
 				count++;
 			}
@@ -68,70 +71,35 @@ int _printf(const char *format, ...)
 				}
 				if (num == 0)
 				{
-				_putchar('0');
-				count++;
+					_putchar('0');
+					count++;
 				}
 				else
 				{
-				print_number(num);
-				{
-				int temp = num;
-				int digits = 0;
+					print_number(num);
+					{
+						int temp = num;
+						int digits = 0;
 
-				if (temp == 0) 
-				{
-				digits = 1;
-				} else 
-				  else
-    {
-        print_number(num);
-        {
-            int temp = num;
-            int digits = 0;
-
-            if (temp == 0) {
-                digits = 1;
-            } else {
-                while (temp)
-                {
-                    digits++;
-                    temp /= 10;
-                }
-            }
-            count += digits;  else
-    {
-        print_number(num);
-        {
-            int temp = num;
-            int digits = 0;
-
-            if (temp == 0)
-			{
-			digits = 1;
-            }
-			else
-			{
-            while (temp)
-            {
-                    digits++;
-                    temp /= 10;
-            }
-            }
-            count += digits;
-			{
-            while (temp)
-            {
-					digits++;
-					temp /= 10;
-                }
-            }
-            count += digits;
+						if (temp == 0)
+						{
+							digits = 1;
+						}
+						else
+						{
+							while (temp)
+							{
+								digits++;
+								temp /= 10;
+							}
+						}
+						count += digits;
 					}
 				}
 			}
 			else if (*format == 's')
 			{
-				char *str = va_arg(args, char*);
+				char *str = va_arg(args, char *);
 				int str_len = 0;
 
 				while (str[str_len] != '\0')
@@ -142,7 +110,6 @@ int _printf(const char *format, ...)
 			}
 			else
 			{
-				/* Handle unknown format specifiers */
 				_putchar('%');
 				_putchar(*format);
 				count += 2;
