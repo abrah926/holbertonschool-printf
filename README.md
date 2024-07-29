@@ -1,7 +1,12 @@
+<<<<<<< HEAD
 
 Custom printf Project
 
 
+=======
+Custom printf Project
+
+>>>>>>> 7c0883605fdc18a07c098e1d8f5214b2acc2072d
 This repository contains a custom implementation of the printf function in C. The project is part of the Holberton School curriculum, aimed at deepening the understanding of variadic functions, string manipulation, and formatted output.
 Description
 
