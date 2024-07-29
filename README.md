@@ -1,4 +1,3 @@
-Certainly! Here's the clean version of the README file:
 Custom printf Project
 
 This repository contains a custom implementation of the printf function in C. The project is part of the Holberton School curriculum, aimed at deepening the understanding of variadic functions, string manipulation, and formatted output.
